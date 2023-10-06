@@ -6,6 +6,10 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains.summarize import load_summarize_chain
 from langchain.document_loaders import PyPDFLoader
 
+from langchain.chains.mapreduce import MapReduceChain
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.chains import ReduceDocumentsChain, MapReduceDocumentsChain
+
 # Set API keys from session state
 openai_api_key = st.session_state.openai_api_key
 
@@ -36,7 +40,7 @@ if st.button("Summarize"):
 
               # Initialize the OpenAI module, load and run the summarize chain
               llm=OpenAI(temperature=0, openai_api_key=openai_api_key, model_name="gpt-3.5-turbo-16k")
-              chain = load_summarize_chain(llm, chain_type="stuff")
+              chain = load_summarize_chain(llm, chain_type="map_reduce")
               search = vectordb.similarity_search(" ")
               summary = chain.run(input_documents=search, question="Write a summary within 200 words.")
 
