@@ -19,7 +19,7 @@ source_doc = st.file_uploader("Source Document", label_visibility="collapsed", t
 if st.button("Summarize"):
     # Validate inputs
     if not openai_api_key.strip() or not source_doc:
-        st.error(f"Please provide the missing fields.")
+        st.error(f"Please provide the missing fields 111.")
     else:
         try:
             with st.spinner('Please wait...'):
@@ -35,7 +35,7 @@ if st.button("Summarize"):
               vectordb = Chroma.from_documents(pages, embeddings)
 
               # Initialize the OpenAI module, load and run the summarize chain
-              llm=OpenAI(temperature=0, openai_api_key=openai_api_key)
+              llm=OpenAI(temperature=0, openai_api_key=openai_api_key, model_name="gpt-3.5-turbo-16k")
               chain = load_summarize_chain(llm, chain_type="stuff")
               search = vectordb.similarity_search(" ")
               summary = chain.run(input_documents=search, question="Write a summary within 200 words.")
