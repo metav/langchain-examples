@@ -14,19 +14,19 @@ from langchain.chains import ReduceDocumentsChain, MapReduceDocumentsChain
 openai_api_key = st.session_state.openai_api_key
 
 # Streamlit app
-st.subheader('Document Summary')
-source_doc = st.file_uploader("Upload Source Document", type="pdf")
+st.subheader('Document Summary11111')
+source_doc = st.file_uploader("Upload Source Document11111", type="pdf")
 
 # If the 'Summarize' button is clicked
 if st.button("Summarize"):
     # Validate inputs
     if not openai_api_key:
-        st.error("Please provide the missing API keys in Settings.")
+        st.error("Please provide the missing API keys in Settings -- test")
     elif not source_doc:
         st.error("Please provide the source document.")
     else:
         try:
-            with st.spinner('Please wait...'):
+            with st.spinner('Please wait...-- test'):
               # Save uploaded file temporarily to disk, load and split the file into pages, delete temp file
               with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
                   tmp_file.write(source_doc.read())
