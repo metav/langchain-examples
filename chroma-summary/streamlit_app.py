@@ -38,7 +38,7 @@ if st.button("Summarize"):
               llm=OpenAI(temperature=0, openai_api_key=openai_api_key, model_name="gpt-3.5-turbo-16k")
               chain = load_summarize_chain(llm, chain_type="stuff")
               search = vectordb.similarity_search(" ")
-              summary = chain.run(input_documents=search, question="Write a summary within 500 word in Chinsese")
+              summary = chain.run(input_documents=search, question="用中文撰写一段500字左右的文档总结")
 
               st.success(summary)
         except Exception as e:
