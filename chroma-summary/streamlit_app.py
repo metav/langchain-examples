@@ -1,6 +1,7 @@
 import os, tempfile
 import streamlit as st
 from langchain.llms.openai import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores.chroma import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains.summarize import load_summarize_chain
@@ -35,7 +36,7 @@ if st.button("Summarize"):
               vectordb = Chroma.from_documents(pages, embeddings)
 
               # Initialize the OpenAI module, load and run the summarize chain
-              llm=OpenAI(temperature=0, openai_api_key=openai_api_key, model_name="gpt-3.5-turbo-16k")
+              llm=ChatOpenAI(temperature=0, openai_api_key=openai_api_key, model_name="gpt-3.5-turbo-16k")
               chain = load_summarize_chain(llm, chain_type="stuff")
               search = vectordb.similarity_search(" ")
               summary = chain.run(input_documents=search, question="用中文撰写一段500字左右的文档总结，用中文回答我的问题。")
